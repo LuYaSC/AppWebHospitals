@@ -1,4 +1,3 @@
-
 # AppWebHospitals
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
@@ -37,47 +36,44 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Description and Current Operations
 
-Template for the management of hospital administration systems
+Template for the management of hospital administration systems<br />
 
-Current operations:
-
-Creation of hospitals
-Creation of specialties
-Creation of doctors
-Patient creation
-Creation of patient visit note
-
-Hospital edition
-Edition of specialties
-Doctors edition
-Edition of patients
-Edition of patient visit note
-
-Delete Hospitals
-Delete specialties
-Eliminate Doctors
-Delete patients
-Delete patient visit note
-
-Searches by hospital name
-Searches by specialty name
-Searches of doctors and patients by:
-  -Name
-  -Last Name
-  -Date of Birth
-
-Search for a medical visit note by:
-  -Hospital
-  -Specialty
-  -Doctor
-  -Patient
-  -Creation date
+Current operations:<br />
+<br />
+Creation of hospitals<br />
+Creation of specialties<br />
+Creation of doctors<br />
+Patient creation<br />
+Creation of patient visit note<br />
+<br />
+Hospital edition<br />
+Edition of specialties<br />
+Doctors edition<br />
+Edition of patients<br />
+Edition of patient visit note<br />
+<br />
+Delete Hospitals<br />
+Delete specialties<br />
+Eliminate Doctors<br />
+Delete patients<br />
+Delete patient visit note<br />
+<br />
+Searches by hospital name<br />
+Searches by specialty name<br />
+Searches of doctors and patients by:<br />
+-Name<br />
+-Last Name<br />
+-Date of Birth<br />
+<br />
+Search for a medical visit note by:<br />
+-Hospital<br />
+-Specialty<br />
+-Doctor<br />
+-Patient<br />
+-Creation date<br />
 
 ## Demo
 
-| Dashboard | User Profile | Tables | Icons | Notifications |
-| --- | --- | --- | --- | --- |
-| [![Start page](https://drive.google.com/file/d/1g_hO7jC3U4PkQ8P8MN6qKTbP0zyVj0nt/view)]
-
-
-
+You can find images of the template in the folder "template" found in the path 
+<br /> 
+"src/assets/template"
