@@ -20,6 +20,9 @@ import { SpecialtiesComponent } from './views/specialties/specialties.component'
 import { CreateSpecialtyComponent } from './views/specialties/components/create-specialty/create-specialty.component';
 import { VisitNotesComponent } from './views/visit-notes/visit-notes.component';
 import { CreateVisitNoteComponent } from './views/visit-notes/components/create-visit-note/create-visit-note.component';
+import { DoctorsDetailsComponent } from './views/home/components/doctors-details/doctors-details.component';
+import { SpecialtiesDetailsComponent } from './views/home/components/specialties-details/specialties-details.component';
+import { PatientsDetailsComponent } from './views/home/components/patients-details/patients-details.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +42,9 @@ import { CreateVisitNoteComponent } from './views/visit-notes/components/create-
     CreateSpecialtyComponent,
     VisitNotesComponent,
     CreateVisitNoteComponent,
+    DoctorsDetailsComponent,
+    SpecialtiesDetailsComponent,
+    PatientsDetailsComponent,
   ],
   imports: [
     BrowserModule,

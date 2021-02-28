@@ -19,27 +19,27 @@ export class Specialty implements Audit {
         var list = [];
         list.push(new Specialty({
             dateCreation: new Date("2019-01-14"), dateModification: new Date("2020-02-16"), userCreation: "ADMIN", userModification: "ADMIN",
-            name: "Cardiologia", description: "description", code: 1, avatar: "https://cdn.pixabay.com/photo/2016/03/31/19/10/avatar-1294774_960_720.png"
+            name: "Cardiologia", description: "description", code: 1, avatar: "https://i.pinimg.com/originals/ca/29/e6/ca29e6f0a8d3e946a3231bca33c1ae2b.png"
         }));
         list.push(new Specialty({
             dateCreation: new Date("2019-01-14"), dateModification: new Date("2020-02-16"), userCreation: "ADMIN", userModification: "ADMIN",
-            name: "Pediatria", description: "description", code: 2, avatar: "https://cdn.pixabay.com/photo/2016/03/31/19/10/avatar-1294774_960_720.png"
+            name: "Pediatria", description: "description", code: 2, avatar: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTuBRcfo2DA2cN7cErfRuIFSAtc8Bc5z5OVtw&usqp=CAU"
         }));
         list.push(new Specialty({
             dateCreation: new Date("2019-01-14"), dateModification: new Date("2020-02-16"), userCreation: "ADMIN", userModification: "ADMIN",
-            name: "Infectología", description: "description", code: 3, avatar: "https://cdn.pixabay.com/photo/2016/03/31/19/10/avatar-1294774_960_720.png"
+            name: "Infectología", description: "description", code: 3, avatar: "http://www.amofac.org/cursos/pluginfile.php/2678/course/overviewfiles/2.png"
         }));
         list.push(new Specialty({
             dateCreation: new Date("2019-01-14"), dateModification: new Date("2020-02-16"), userCreation: "ADMIN", userModification: "ADMIN",
-            name: "Neumología", description: "description", code: 4, avatar: "https://cdn.pixabay.com/photo/2016/03/31/19/10/avatar-1294774_960_720.png"
+            name: "Neumología", description: "description", code: 4, avatar: "https://st.depositphotos.com/3356953/4654/v/600/depositphotos_46547529-stock-illustration-lungs-sign.jpg"
         }));
         list.push(new Specialty({
             dateCreation: new Date("2019-01-14"), dateModification: new Date("2020-02-16"), userCreation: "ADMIN", userModification: "ADMIN",
-            name: "Neurología", description: "description", code: 5, avatar: "https://cdn.pixabay.com/photo/2016/03/31/19/10/avatar-1294774_960_720.png"
+            name: "Neurología", description: "description", code: 5, avatar: "https://thumbs.dreamstime.com/z/tecnolog%C3%ADa-de-red-inteligente-artificial-la-neurolog%C3%ADa-logo-template-141613248.jpg"
         }));
         list.push(new Specialty({
             dateCreation: new Date("2019-01-14"), dateModification: new Date("2020-02-16"), userCreation: "ADMIN", userModification: "ADMIN",
-            name: "Psiquiatría", description: "description", code: 6, avatar: "https://cdn.pixabay.com/photo/2016/03/31/19/10/avatar-1294774_960_720.png"
+            name: "Psiquiatría", description: "description", code: 6, avatar: "https://st2.depositphotos.com/5665934/8873/v/600/depositphotos_88738868-stock-illustration-maze-of-human-mind.jpg"
         }));
         return list;
     }
