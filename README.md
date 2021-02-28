@@ -1,15 +1,13 @@
-# AppWebHospitals
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
-
-For install all dependencies execute Run `npm install` (only when running the project for the first time)
-
 ## Quick start
 
 Quick start options:
 
 - [Download from Github] (git clone https://github.com/LuYaSC/AppWebHospitals.git).
+# AppWebHospitals
 
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.1.
+
+For install all dependencies execute Run `npm install` (only when running the project for the first time)
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
