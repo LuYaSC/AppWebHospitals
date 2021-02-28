@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import { ShowErrorsComponent } from './views/components/show-errors/show-errors.component';
 import { CreateDoctorComponent } from './views/doctors/components/create-doctor/create-doctor.component';
 import { DoctorsComponent } from './views/doctors/doctors.component';
 import { CreateHospitalComponent } from './views/home/components/create-hospital/create-hospital.component';
@@ -23,6 +22,7 @@ import { CreateVisitNoteComponent } from './views/visit-notes/components/create-
 import { DoctorsDetailsComponent } from './views/home/components/doctors-details/doctors-details.component';
 import { SpecialtiesDetailsComponent } from './views/home/components/specialties-details/specialties-details.component';
 import { PatientsDetailsComponent } from './views/home/components/patients-details/patients-details.component';
+import { ControlMessagesComponent } from './views/components/control-messages/control-messages.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +34,6 @@ import { PatientsDetailsComponent } from './views/home/components/patients-detai
     HomeComponent,
     PatientsComponent,
     DoctorsComponent,
-    ShowErrorsComponent,
     CreateDoctorComponent,
     CreatePatientComponent,
     CreateHospitalComponent,
@@ -45,12 +44,14 @@ import { PatientsDetailsComponent } from './views/home/components/patients-detai
     DoctorsDetailsComponent,
     SpecialtiesDetailsComponent,
     PatientsDetailsComponent,
+    ControlMessagesComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

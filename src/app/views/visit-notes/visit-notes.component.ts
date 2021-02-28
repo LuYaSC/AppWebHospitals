@@ -94,7 +94,6 @@ export class VisitNotesComponent implements OnInit {
   }
 
   createVisitNote(visitNote: VisitNote) {
-    debugger;
     if (this.operationType === 1) {
       visitNote.code = this.utils.getCodeArray(this.visitNotes) + 100;
       this.visitNotes.push(visitNote);
@@ -111,7 +110,6 @@ export class VisitNotesComponent implements OnInit {
   }
 
   deleteVisitNote(visitNote: VisitNotesResult) {
-    debugger;
     this.listVisitNotes = this.listVisitNotes.filter(x => x.code !== visitNote.code);
   }
 
@@ -130,6 +128,17 @@ export class VisitNotesComponent implements OnInit {
     if (this.searchVisitNoteDto.codePatient !== 0) {
       this.listVisitNotes = this.listVisitNotes.filter(x => x.codePatient == this.searchVisitNoteDto.codePatient);
     }
+    if (this.searchVisitNoteDto.dateNote !== undefined) {
+      this.listVisitNotes = this.listVisitNotes.filter(x => x.dateNote == this.searchVisitNoteDto.dateNote.toString());
+    }
+  }
 
+  cleanSearch() {
+    this.searchVisitNoteDto.codeHospital = 0;
+    this.searchVisitNoteDto.codeSpecialty = 0;
+    this.searchVisitNoteDto.codeDoctor = 0;
+    this.searchVisitNoteDto.codePatient = 0;
+    this.searchVisitNoteDto.dateNote = undefined;
+    this.searchVisitNote();
   }
 }

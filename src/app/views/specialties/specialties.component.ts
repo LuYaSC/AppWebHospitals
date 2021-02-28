@@ -63,6 +63,7 @@ export class SpecialtiesComponent implements OnInit {
   createSpecialty(specialty: Specialty) {
     if (this.operationType === 1) {
       specialty.code = this.utils.getCodeArray(this.specialties) + 100;
+      specialty.avatar = 'https://st2.depositphotos.com/5572200/8506/v/600/depositphotos_85062908-stock-illustration-medical-logo.jpg';
       this.specialties.push(specialty);
     } else {
       for (let i = 0; i < this.specialties.length; i++) {
@@ -85,7 +86,7 @@ export class SpecialtiesComponent implements OnInit {
   searchSpecialty(){
     this.listSpecialties = [];
     if (this.searchSpecialtiesDto.name !== null && this.searchSpecialtiesDto.name !== undefined && this.searchSpecialtiesDto.name !== '') {
-      this.listSpecialties = this.listSpecialties.concat(this.specialties.filter(x => x.name.includes(this.searchSpecialtiesDto.name.trim())));
+      this.listSpecialties = this.listSpecialties.concat(this.specialties.filter(x => x.name.includes(this.searchSpecialtiesDto.name.trim().toUpperCase())));
     }
     if (this.searchSpecialtiesDto.name === '') {
       this.listSpecialties = this.specialties;

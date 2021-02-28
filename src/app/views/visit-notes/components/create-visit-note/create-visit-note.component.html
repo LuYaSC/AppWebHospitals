@@ -29,28 +29,50 @@
     </select>
   </div>
 </div>
-<div class="form-group row">
-  <div class="col-md-12">
-    <label class="form-label">Observaciones:</label>
-        <input class="form-control" type="text" [(ngModel)]="visitNoteDto.observations">
+<div class="form-group">
+  <form [formGroup]="angForm" novalidate>
+    <div class="form-group">
+      <label>Observaciones:</label>
+      <textarea  class="form-control" formControlName="observations" rows="3" [(ngModel)]="visitNote.observations" maxlength="150"></textarea>
+    </div>
+    <div
+      *ngIf="angForm.controls['observations'].invalid && (angForm.controls['observations'].dirty || angForm.controls['observations'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['observations'].errors.required">
+        Observaciones es Requerido
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Receta Médica:</label>
+      <textarea  class="form-control" formControlName="prescription" rows="3" [(ngModel)]="visitNote.prescription" maxlength="150"></textarea>
+    </div>
+    <div
+      *ngIf="angForm.controls['prescription'].invalid && (angForm.controls['prescription'].dirty || angForm.controls['prescription'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['prescription'].errors.required">
+        Receta Médica es Requerido
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Fecha de Atención:</label>
+      <input class="form-control" formControlName="dateCreation" type="date" [(ngModel)]="visitNote.dateCreation">
+    </div>
+    <div
+      *ngIf="angForm.controls['dateCreation'].invalid && (angForm.controls['dateCreation'].dirty || angForm.controls['dateCreation'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['dateCreation'].errors.required">
+        Fecha de Atención es Requerido
+      </div>
+    </div>
 
-  </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" [disabled]="angForm.pristine || angForm.invalid"
+        (click)="managerVisitNote()">{{operationType === 1 ? 'Crear'
+        :
+        'Modificar'}}</button>
+      <button type="button" class="btn btn-outline-danger"
+        (click)="operationType = 3; managerVisitNote(); ">Cancelar</button>
+    </div>
+  </form>
 </div>
-<div class="form-group row">
-  <div class="col-md-12">
-    <label class="form-label">Receta Médica:</label>
-        <input class="form-control" type="text" [(ngModel)]="visitNoteDto.prescription">
-  </div>
-</div>
-<div class="form-group row">
-  <div class="col-md-6">
-    <label for="exampleFormControlSelect1">Seleccione Fecha de Atención</label>
-    <input type="date" class="form-control">
-  </div>
-</div>
-<div class="modal-footer">
-  <button type="button" class="btn btn-outline-success" (click)="managerVisitNote()">{{operationType === 1 ? 'Crear' :
-    'Modificar'}}</button>
-  <button type="button" class="btn btn-outline-danger"
-    (click)="operationType = 3; managerVisitNote(); ">Cancelar</button>
-</div>
+

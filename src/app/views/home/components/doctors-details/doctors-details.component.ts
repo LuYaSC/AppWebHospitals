@@ -14,11 +14,10 @@ export class DoctorsDetailsComponent implements OnInit {
   listDoctors: DoctorInformationResult[] = [];
   listDoctorsApp = new Doctor().CreateListDoctor();
   listSpecialties = new Specialty().CreateListSpecialty();
-  listRelation = new DoctorSpecialty().AssingHospitalDoctors();
+  @Input() listRelation = new DoctorSpecialty().AssingHospitalDoctors();
   constructor() { }
 
   ngOnInit(): void {
-    debugger;
     let listReduced = this.listRelation.filter(x => x.codeHospital === this.codeHospital);
     for (let i = 0; i < listReduced.length; i++) {
       let doctor = this.listDoctorsApp.find(x => x.code === listReduced[i].codeDoctor);

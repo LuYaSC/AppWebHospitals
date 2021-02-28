@@ -1,7 +1,8 @@
-import { Component, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Hospital } from 'src/app/services/models/hospital';
+import { DoctorSpecialty } from 'src/app/services/models/doctor';
+import { Hospital, HospitalSpecialty } from 'src/app/services/models/hospital';
 import { UtilsService } from 'src/app/services/utils-service';
 import { SearchHospitalDto } from './components/model/search-hospital-dto';
 
@@ -13,6 +14,10 @@ import { SearchHospitalDto } from './components/model/search-hospital-dto';
 })
 export class HomeComponent implements OnInit {
 
+  //Data
+  listRelation = new DoctorSpecialty().AssingHospitalDoctors();
+  listSpecialties = new HospitalSpecialty().AssingHospitalSpecialty();
+
   hospitals: Hospital[] = [];
   listHospitals: Hospital[] = [];
   hospitalDto = new Hospital();
@@ -21,11 +26,19 @@ export class HomeComponent implements OnInit {
   operationType: number;
   searchHospitalDto = new SearchHospitalDto();
   isVisibleInformation = false;
+  isNewHospital = false;
   codeHospital: number;
+  form: any;
+
   @Output() CreateEditHospital: EventEmitter<any> = new EventEmitter();
 
-  @ViewChild('detailForm') form: NgForm;
-  constructor(private modalService: NgbModal, private utils: UtilsService) { }
+  constructor(private modalService: NgbModal, private utils: UtilsService) {
+    this.form = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
+      body: new FormControl('', Validators.required)
+    });
+  }
 
   ngOnInit(): void {
     this.hospitals = new Hospital().CreateListHospital();
@@ -51,7 +64,7 @@ export class HomeComponent implements OnInit {
     }
   }
 
-  handleActionsHospital(content, type: number, hospital?: Hospital) {
+  handleActionsHospital(content: any, type: number, hospital?: Hospital) {
     this.isVisibleInformation = false;
     this.operationType = type;
     if (type === 2) {
@@ -64,6 +77,9 @@ export class HomeComponent implements OnInit {
     if (this.operationType === 1) {
       hospital.code = this.utils.getCodeArray(this.hospitals) + 100;
       hospital.avatar = 'https://image.freepik.com/vector-gratis/plantilla-logo-hospital_1061-6.jpg';
+      this.listRelation = this.listRelation.concat(this.utils.assingDoctorsNewHospital(hospital.code));
+      this.listSpecialties = this.listSpecialties.concat(this.utils.assingNewHospitalSpecialty(hospital.code));
+      this.isNewHospital = true;
       this.hospitals.push(hospital);
     } else {
       for (let i = 0; i < this.hospitals.length; i++) {
@@ -71,6 +87,7 @@ export class HomeComponent implements OnInit {
           this.hospitals[i] = Object.assign({}, hospital);
         }
       }
+      this.isNewHospital = false;
     }
     this.cleanSearch();
     this.searchHospital();
@@ -79,12 +96,13 @@ export class HomeComponent implements OnInit {
 
   deleteHospital(hospital: Hospital) {
     this.hospitals = this.hospitals.filter(x => x.code !== hospital.code);
+    this.listRelation = this.listRelation.filter(x => x.codeHospital !== hospital.code);
+    this.listSpecialties = this.listSpecialties.filter(x => x.codeHospital !== hospital.code);
     this.cleanSearch();
     this.searchHospital();
   }
 
   searchHospital() {
-    debugger;
     this.isVisibleInformation = false;
     this.listHospitals = [];
     if (this.searchHospitalDto.name !== null && this.searchHospitalDto.name !== undefined && this.searchHospitalDto.name !== '') {
@@ -101,7 +119,6 @@ export class HomeComponent implements OnInit {
   }
 
   getInformation(hospital: Hospital){
-    debugger;
     this.isVisibleInformation = true;
     this.hospitalDetail = hospital;
     this.codeHospital = hospital.code;

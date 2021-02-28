@@ -1,16 +1,16 @@
 import { Audit } from "./audit";
 
 export class Hospital implements Audit {
-  dateCreation: Date;
-  dateModification: Date;
+  dateCreation: string;
+  dateModification: string;
   userCreation: string;
   userModification: string;
-  name: string;
-  address: string;
+  name: string = '';
+  address: string = '';
   telephone: number;
   code: number;
   isDeleted: boolean;
-  avatar: string;
+  avatar: string = 'https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg';
 
   constructor(values: Object = {}) {
     Object.assign(this, values);
@@ -46,11 +46,7 @@ export class Hospital implements Audit {
   }
 }
 
-export class HospitalSpecialty /*implements Audit*/ {
-  //dateCreation: Date;
-  //dateModification: Date;
-  //userCreation: string;
-  //userModification: string;
+export class HospitalSpecialty  {
   codeHospital: number;
   specialtyCode: number;
 

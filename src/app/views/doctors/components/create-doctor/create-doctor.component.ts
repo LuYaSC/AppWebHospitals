@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Doctor, DoctorSpecialty } from 'src/app/services/models/doctor';
 import { Hospital, HospitalSpecialty } from 'src/app/services/models/hospital';
 import { Specialty } from 'src/app/services/models/specialty';
@@ -20,6 +21,7 @@ export class CreateDoctorComponent implements OnInit {
   @Output() onChangeSpecialty = new EventEmitter();
   @Output() cancel = new EventEmitter();
   @Input() createDoctorSpecialtyDto = new DoctorSpecialty();
+  angForm: FormGroup;
 
   //Data
   hospitalsApp = new Hospital().CreateListHospital();
@@ -29,12 +31,18 @@ export class CreateDoctorComponent implements OnInit {
   listDoctorSpecialties = new DoctorSpecialty().AssingHospitalDoctors();
   listSpecialties: Specialty[] = [];
 
-  constructor(private utils: UtilsService) { }
+  constructor(private utils: UtilsService, private fb: FormBuilder) {
+    this.angForm = this.fb.group({
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      address: []
+    });
+  }
 
   ngOnInit(): void {
     this.doctorDto = this.utils.AddAuditDates(this.doctorDto, this.operationType);
     this.doctor = Object.assign({}, this.doctorDto);
-    debugger;
     if (this.createDoctorSpecialtyDto.codeHospital === undefined) {
       this.createDoctorSpecialtyDto.codeHospital = this.hospitalsApp[0].code;
     }

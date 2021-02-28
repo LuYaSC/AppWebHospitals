@@ -7,7 +7,7 @@ export class VisitNotesResult {
     nameSpecialty: string;
     codeHospital: number;
     nameHospital: string;
-    dateNote: Date;
+    dateNote: string;
     observations: string;
     prescription: string;
     code: number;

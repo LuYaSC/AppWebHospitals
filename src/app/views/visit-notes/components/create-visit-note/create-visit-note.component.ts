@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Doctor, DoctorSpecialty } from 'src/app/services/models/doctor';
 import { Hospital, HospitalSpecialty } from 'src/app/services/models/hospital';
 import { Patient } from 'src/app/services/models/patient';
@@ -19,6 +20,7 @@ export class CreateVisitNoteComponent implements OnInit {
   @Input() operationType: number;
   @Output() onChange = new EventEmitter();
   @Output() cancel = new EventEmitter();
+  angForm: FormGroup;
 
   //Data
   hospitalsApp = new Hospital().CreateListHospital();
@@ -31,18 +33,24 @@ export class CreateVisitNoteComponent implements OnInit {
   listSpecialties: Specialty[] = [];
   listDoctors: Doctor[] = [];
 
-  constructor(private utils: UtilsService) { }
+  constructor(private utils: UtilsService, private fb: FormBuilder) {
+    this.angForm = this.fb.group({
+      observations: ['', Validators.required],
+      prescription: ['', Validators.required],
+      dateCreation: ['', Validators.required],
+    });
+  }
 
   ngOnInit(): void {
     this.visitNoteDto.codeHospital = this.hospitalsApp[0].code;
     this.visitNoteDto.codePatient = this.patientsApp[0].code;
     this.visitNoteDto = this.utils.AddAuditDates(this.visitNoteDto, this.operationType);
+    this.visitNoteDto.dateCreation = undefined;
     this.visitNote = Object.assign({}, this.visitNoteDto);
     this.selectHospital();
   }
 
   managerVisitNote() {
-    debugger;
     switch (this.operationType) {
       case 1:
       case 2:
@@ -69,7 +77,6 @@ export class CreateVisitNoteComponent implements OnInit {
   }
 
   selectSpecialty() {
-    debugger;
     this.listDoctors = [];
     let listFilterDoctors = this.listDoctorSpecialties.filter(x => x.specialtyCode === this.visitNote.codeSpecialty && x.codeHospital === this.visitNote.codeHospital);
     this.visitNote.codeDoctor = listFilterDoctors.length > 0 ? listFilterDoctors[0].codeDoctor : 0;

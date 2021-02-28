@@ -64,8 +64,7 @@ export class DoctorsComponent implements OnInit {
     }
   }
 
-  handleActionsDoctor(content, type: number, doctor?: Doctor) {
-    debugger;
+  handleActionsDoctor(content: any, type: number, doctor?: Doctor) {
     this.operationType = type;
     this.createDoctorSpecialtyDto.codeHospital = this.createDoctorSpecialtyDto.specialtyCode = undefined;
     if (type === 2) {
@@ -80,6 +79,7 @@ export class DoctorsComponent implements OnInit {
   manageDoctor(doctor: Doctor) {
     if (this.operationType === 1) {
       doctor.code = this.codeDoctor = this.utils.getCodeArray(this.doctors) + 100;
+      doctor.avatar = 'https://www.asvinshospitals.com/wp-content/uploads/2019/10/default-placeholder-doctor-half-length-Copy.jpg';
       this.doctors.push(doctor);
     } else {
       for (let i = 0; i < this.doctors.length; i++) {
@@ -95,7 +95,6 @@ export class DoctorsComponent implements OnInit {
   }
 
   manageSpecialty(specialty: DoctorSpecialty) {
-    debugger;
     specialty.codeDoctor = this.codeDoctor;
     if (this.operationType === 2) {
       this.listSpecialtiesHospitals = this.listSpecialtiesHospitals.filter(x => x.codeDoctor !== this.codeDoctor &&
@@ -106,7 +105,6 @@ export class DoctorsComponent implements OnInit {
   }
 
   deleteDoctor(Doctor: Doctor) {
-    debugger;
     this.doctors = this.doctors.filter(x => x.code !== Doctor.code);
     this.listDoctors = this.doctors;
     this.cleanSearch();
@@ -122,7 +120,7 @@ export class DoctorsComponent implements OnInit {
       this.listDoctors = this.listDoctors.concat(this.doctors.filter(x => x.lastName.includes(this.searchDoctorDto.lastName.trim())));
     }
     if (this.searchDoctorDto.birthDate !== null && this.searchDoctorDto.birthDate !== undefined) {
-      this.listDoctors = this.listDoctors.concat(this.doctors.filter(x => x.birthDate == this.searchDoctorDto.birthDate));
+      this.listDoctors = this.listDoctors.concat(this.doctors.filter(x => x.birthDate == this.searchDoctorDto.birthDate.toString()));
     }
     if (this.searchDoctorDto.name === '' && this.searchDoctorDto.lastName === '' && this.searchDoctorDto.birthDate === undefined) {
       this.listDoctors = this.doctors;
@@ -133,6 +131,7 @@ export class DoctorsComponent implements OnInit {
     this.searchDoctorDto.name = '';
     this.searchDoctorDto.lastName = '';
     this.searchDoctorDto.birthDate = undefined;
+    this.searchDoctor();
   }
 
   selectHospital() {

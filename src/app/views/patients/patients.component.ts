@@ -49,7 +49,6 @@ export class PatientsComponent implements OnInit {
   }
 
   handleActionsPatient(content: any, type: number, patient?: Patient) {
-    debugger;
     this.operationType = type;
     if (type === 2) {
       this.patientDto = patient;
@@ -60,6 +59,7 @@ export class PatientsComponent implements OnInit {
   createPatient(patient: Patient) {
     if (this.operationType === 1) {
       patient.code = this.utils.getCodeArray(this.patients) + 100;
+      patient.avatar = 'https://thumbs.dreamstime.com/b/default-avatar-profile-icon-grey-photo-placeholder-male-default-profile-gray-person-picture-isolated-white-background-good-man-102846161.jpg';
       this.patients.push(patient);
     } else {
       for (let i = 0; i < this.patients.length; i++) {
@@ -74,14 +74,12 @@ export class PatientsComponent implements OnInit {
   }
 
   deletePatient(patient: Patient) {
-    debugger;
     this.patients = this.patients.filter(x => x.code !== patient.code);
     this.cleanSearch();
     this.searchPatient();
   }
 
   searchPatient() {
-    debugger;
     this.listPatients = [];
     if (this.searchPatientDto.name !== null && this.searchPatientDto.name !== undefined && this.searchPatientDto.name !== '') {
       this.listPatients = this.listPatients.concat(this.patients.filter(x => x.name.includes(this.searchPatientDto.name.trim())));
@@ -90,7 +88,7 @@ export class PatientsComponent implements OnInit {
       this.listPatients = this.listPatients.concat(this.patients.filter(x => x.lastName.includes(this.searchPatientDto.lastName.trim())));
     }
     if (this.searchPatientDto.birthDate !== null && this.searchPatientDto.birthDate !== undefined) {
-      this.listPatients = this.listPatients.concat(this.patients.filter(x => x.birthDate == this.searchPatientDto.birthDate));
+      this.listPatients = this.listPatients.concat(this.patients.filter(x => x.birthDate == this.searchPatientDto.birthDate.toString()));
     }
     if (this.searchPatientDto.name === '' && this.searchPatientDto.lastName === '' && this.searchPatientDto.birthDate === undefined) {
       this.listPatients = this.patients;
@@ -101,6 +99,7 @@ export class PatientsComponent implements OnInit {
     this.searchPatientDto.name = '';
     this.searchPatientDto.lastName = '';
     this.searchPatientDto.birthDate = undefined;
+    this.searchPatient();
   }
 }
 

@@ -3,4 +3,5 @@ export class SearchNoteVisitDto {
     codeSpecialty: number = 0;
     codeDoctor: number = 0;
     codePatient: number = 0;
+    dateNote: string;
 }

@@ -5,9 +5,10 @@
         <label for="staticEmail" class="col-sm-2 col-form-label">Nombre Hospital</label>
         <div class="col-sm-6">
           <input type="text" name="nameHospital" class="form-control" [(ngModel)]="searchHospitalDto.name"
-            #nameHospital="ngModel" maxlength="50" appOnlyType="alphanumericBasicSymbols"
-            appValidate="alphanumericBasicSymbols">
+            (ngModelChange)="searchHospitalDto.name = searchHospitalDto.name.toUpperCase();"
+            maxlength="50" appOnlyType="alphanumericBasicSymbols" appValidate="alphanumericBasicSymbols">
         </div>
+
         <div class="col-sm-2">
           <button type="button" class="btn btn-primary" (click)="searchHospital()">Buscar Hospital</button>
         </div>
@@ -22,6 +23,7 @@
     </div>
   </form>
 </div>
+
 <div class="row">
   <div class="col-md-{{isVisibleInformation ? 10 : 12}}">
     <table class="table table-hover">
@@ -86,14 +88,17 @@
   </div>
   <div class="col-md-2" *ngIf="isVisibleInformation">
     <div class="card" style="width: 18rem;">
+      <div class="card-header bg-info">
+        <h5 class="card-title">{{hospitalDetail.name}}</h5>
+      </div>
+      <br>
       <img src="{{hospitalDetail.avatar}}" class="card-img-top">
       <div class="card-body">
-        <h5 class="card-title">{{hospitalDetail.name}}</h5>
-        <p class="card-text">{{hospitalDetail.address}}</p>
+        <p class="card-text">Dirección: {{hospitalDetail.address}}</p>
         <div class="form-group row">
           <button type="button" class="btn btn-outline-success" (click)="open(contentDoctors)">Doctores</button>
         </div>
-        <div class="form-group row">
+        <div class="form-group row" *ngIf="!isNewHospital">
           <button type="button" class="btn btn-outline-info" (click)="open(contentPatients)">Pacientes</button>
         </div>
         <div class="form-group row">
@@ -129,10 +134,13 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-doctors-details [codeHospital]="codeHospital"></app-doctors-details>
+    <app-doctors-details [codeHospital]="codeHospital" [listRelation]="listRelation"></app-doctors-details>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="modal.dismiss('Cross click')">Aceptar</button>
+    <button class="btn btn-outline-info" aria-current="page" routerLink="/doctors" routerLinkActive="active"
+      (click)="modal.dismiss('Cross click')">Modificar
+      Datos</button><button type="button" class="btn btn-success"
+      (click)="modal.dismiss('Cross click')">Aceptar</button>
   </div>
 </ng-template>
 
@@ -144,10 +152,16 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-patients-details></app-patients-details>
+    <app-patients-details [codeHospital]="codeHospital"></app-patients-details>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="modal.dismiss('Cross click')">Aceptar</button>
+    <button class="btn btn-outline-info" aria-current="page" routerLink="/patients" routerLinkActive="active"
+      (click)="modal.dismiss('Cross click')">Modificar
+      Datos</button>
+    <button class="btn btn-outline-warning" aria-current="page" routerLink="/visit-notes" routerLinkActive="active"
+      (click)="modal.dismiss('Cross click')">Ver
+      Visitas</button>
+    <button type="button" class="btn btn-success" (click)="modal.dismiss('Cross click')">Aceptar</button>
   </div>
 </ng-template>
 
@@ -159,9 +173,12 @@
     </button>
   </div>
   <div class="modal-body">
-    <app-specialties-details [codeHospital]="codeHospital"></app-specialties-details>
+    <app-specialties-details [codeHospital]="codeHospital" [listRelation]="listSpecialties"></app-specialties-details>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="modal.dismiss('Cross click')">Aceptar</button>
+    <a class="btn btn-outline-info" aria-current="page" routerLink="/specialties" routerLinkActive="active"
+      (click)="modal.dismiss('Cross click')">Modificar
+      Datos</a>
+    <button type="button" class="btn btn-success" (click)="modal.dismiss('Cross click')">Aceptar</button>
   </div>
 </ng-template>

@@ -1,6 +1,6 @@
 export interface Audit {
-    dateCreation: Date;
-    dateModification: Date;
+    dateCreation: string;
+    dateModification: string;
     userCreation: string;
     userModification: string;
     isDeleted: boolean;

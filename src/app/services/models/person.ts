@@ -1,21 +1,21 @@
 import { Audit } from "./audit";
 
 export class Person implements Audit {
-    dateCreation: Date;
-    dateModification: Date;
+    dateCreation: string;
+    dateModification: string;
     userCreation: string;
     userModification: string;
     name: string;
     lastName: string;
-    birthDate: Date;
+    birthDate: string;
     address: string;
-    avatar: string;
+    avatar: string = 'https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg';
     code: number;
     isDeleted: boolean;
 
     constructor(values: Object = {}) {
         Object.assign(this, values);
     }
-    
+
 
 }

@@ -1,63 +1,82 @@
-
 <div class="form-group row">
   <div class="col-md-6">
     <label for="exampleFormControlSelect1">Seleccione Hospital</label>
-    <select class="form-control" name="hospital" [(ngModel)]="createDoctorSpecialtyDto.codeHospital" #hospital="ngModel"
-      required (ngModelChange)="selectHospital()">
+    <select class="form-control" name="hospital" [(ngModel)]="createDoctorSpecialtyDto.codeHospital" required
+      (ngModelChange)="selectHospital()">
       <option *ngFor="let hospital of hospitalsApp" [ngValue]="hospital.code">{{hospital.name}}</option>
     </select>
   </div>
   <div class="col-md-6">
     <label for="exampleFormControlSelect1">Seleccione Especialidad</label>
-    <select class="form-control" name="specialty" [(ngModel)]="createDoctorSpecialtyDto.specialtyCode" #specialty="ngModel"
-      required >
+    <select class="form-control" name="specialty" [(ngModel)]="createDoctorSpecialtyDto.specialtyCode" required>
       <option *ngFor="let specialty of listSpecialties" [ngValue]="specialty.code">{{specialty.name}}</option>
     </select>
   </div>
 </div>
 <div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Nombre:</label>
-        <input class="form-control" type="text" [(ngModel)]="doctor.name">
+  <form [formGroup]="angForm" novalidate>
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input class="form-control" formControlName="name" type="text" [(ngModel)]="doctor.name" maxlength="40"
+      (ngModelChange)="doctor.name = doctor.name.toUpperCase();">
     </div>
-</div>
-<div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Apellido:</label>
-        <input class="form-control" type="text" [(ngModel)]="doctor.lastName">
+    <div
+      *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['name'].errors.required">
+        Nombre es Requerido
+      </div>
     </div>
-</div>
-<div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Fecha de Nacimiento:</label>
-        <input class="form-control" type="date" [(ngModel)]="doctor.birthDate">
+    <div class="form-group">
+      <label>Apellido:</label>
+      <input class="form-control" formControlName="lastName" type="text" [(ngModel)]="doctor.lastName" maxlength="40"
+      (ngModelChange)="doctor.lastName = doctor.lastName.toUpperCase();">
     </div>
-</div>
-<div class="form-group">
-    <label class="form-label">Direccion:</label>
-    <input type="text" class="form-control" [(ngModel)]="doctor.address">
-</div>
-
-<div class="form-group" align="center">
-    <label for="pwd">Suba su imagen para el doctor</label>
-    <form class="md-form">
+    <div
+      *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['lastName'].errors.required">
+        Apellido es Requerido
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Fecha de Nacimiento:</label>
+      <input class="form-control" formControlName="birthDate" type="date" [(ngModel)]="doctor.birthDate">
+    </div>
+    <div
+      *ngIf="angForm.controls['birthDate'].invalid && (angForm.controls['birthDate'].dirty || angForm.controls['birthDate'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['birthDate'].errors.required">
+        Fecha de Nacimiento es Requerido
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Dirección:</label>
+      <input class="form-control" formControlName="address" type="text" [(ngModel)]="doctor.address" maxlength="70"
+      (ngModelChange)="doctor.address = doctor.address.toUpperCase();">
+    </div>
+    <div class="form-group" align="center">
+      <label for="pwd">Suba su imagen de perfil</label>
+      <form class="md-form">
         <div class="file-field">
-            <div class="mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                    class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
+          <div class="mb-4">
+            <img src="{{doctor.avatar}}" class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="btn btn-mdb-color btn-rounded float-left">
+              <input type="file">
             </div>
-            <div class="d-flex justify-content-center">
-                <div class="btn btn-mdb-color btn-rounded float-left">
-                    <span>Add photo</span>
-                    <input type="file">
-                </div>
-            </div>
+          </div>
         </div>
-    </form>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="managerDoctor()">{{operationType === 1 ? 'Crear' :
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" [disabled]="angForm.pristine || angForm.invalid"
+        (click)="managerDoctor()">{{operationType === 1 ? 'Crear'
+        :
         'Modificar'}}</button>
-    <button type="button" class="btn btn-outline-danger"
+      <button type="button" class="btn btn-outline-danger"
         (click)="operationType = 3; managerDoctor(); ">Cancelar</button>
+    </div>
+  </form>
 </div>

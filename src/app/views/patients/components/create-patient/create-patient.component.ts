@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Patient } from 'src/app/services/models/patient';
 import { UtilsService } from 'src/app/services/utils-service';
 
@@ -15,11 +16,18 @@ export class CreatePatientComponent implements OnInit {
   @Input() operationType: number;
   @Output() onChange = new EventEmitter();
   @Output() cancel = new EventEmitter();
+  angForm: FormGroup;
 
-  constructor(private utils: UtilsService) { }
+  constructor(private utils: UtilsService, private fb: FormBuilder) {
+    this.angForm = this.fb.group({
+      name: ['', Validators.required],
+      lastName: ['', Validators.required],
+      birthDate: ['', Validators.required],
+      address: ['']
+    });
+  }
 
   ngOnInit(): void {
-    debugger;
     this.patientDto = this.utils.AddAuditDates(this.patientDto, this.operationType);
     this.patient = Object.assign({}, this.patientDto);
   }

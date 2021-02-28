@@ -1,36 +1,52 @@
 <div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Nombre:</label>
-        <input class="form-control" type="text" [(ngModel)]="specialty.name">
+  <form [formGroup]="angForm" novalidate >
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input class="form-control" formControlName="name" type="text" [(ngModel)]="specialty.name" maxlength="40"
+      (ngModelChange)="specialty.name = specialty.name.toUpperCase();">
     </div>
-</div>
-<div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Descripción:</label>
-        <input type="text" class="form-control" [(ngModel)]="specialty.description">
+    <div
+      *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['name'].errors.required">
+        Nombre es Requerido
+      </div>
     </div>
+    <div class="form-group">
+      <label>Descripción:</label>
+      <input class="form-control" formControlName="description" type="text" [(ngModel)]="specialty.description" maxlength="70"
+      (ngModelChange)="specialty.description = specialty.description.toUpperCase();">
+    </div>
+    <div
+      *ngIf="angForm.controls['description'].invalid && (angForm.controls['description'].dirty || angForm.controls['description'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['description'].errors.required">
+        Descripción es Requerido
+      </div>
+    </div>
+    <div class="form-group" align="center">
+      <label for="pwd">Suba su imagen de perfil</label>
+      <form class="md-form">
+        <div class="file-field">
+          <div class="mb-4">
+            <img src="{{specialty.avatar}}" class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="btn btn-mdb-color btn-rounded float-left">
+              <input type="file">
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" [disabled]="angForm.pristine || angForm.invalid"
+        (click)="managerSpecialty()">{{operationType === 1 ? 'Crear'
+        :
+        'Modificar'}}</button>
+      <button type="button" class="btn btn-outline-danger"
+        (click)="operationType = 3; managerSpecialty(); ">Cancelar</button>
+    </div>
+  </form>
 </div>
 
-<div class="form-group" align="center">
-    <label for="pwd">Suba su imagen para el hospital</label>
-    <form class="md-form">
-        <div class="file-field">
-            <div class="mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                    class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="btn btn-mdb-color btn-rounded float-left">
-                    <span>Add photo</span>
-                    <input type="file">
-                </div>
-            </div>
-        </div>
-    </form>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="managerSpecialty()">{{operationType === 1 ? 'Crear' :
-        'Modificar'}}</button>
-    <button type="button" class="btn btn-outline-danger"
-        (click)="operationType = 3; managerSpecialty(); ">Cancelar</button>
-</div>

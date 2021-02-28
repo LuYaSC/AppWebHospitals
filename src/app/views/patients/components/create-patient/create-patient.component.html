@@ -1,46 +1,68 @@
-<div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Nombre:</label>
-        <input class="form-control" type="text" [(ngModel)]="patient.name">
-    </div>
-</div>
-<div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Apellido:</label>
-        <input class="form-control" type="text" [(ngModel)]="patient.lastName">
-    </div>
-</div>
-<div class="form-group">
-    <div class="mb-3">
-        <label class="form-label">Fecha de Nacimiento:</label>
-        <input class="form-control" type="date" [(ngModel)]="patient.birthDate">
-    </div>
-</div>
-<div class="form-group">
-    <label class="form-label">Direccion:</label>
-    <input type="text" class="form-control" [(ngModel)]="patient.address">
-</div>
 
-<div class="form-group" align="center">
-    <label for="pwd">Suba su imagen para el doctor</label>
-    <form class="md-form">
+<div class="form-group">
+  <form [formGroup]="angForm" novalidate>
+    <div class="form-group">
+      <label>Nombre:</label>
+      <input class="form-control" formControlName="name" type="text" [(ngModel)]="patient.name" maxlength="40"
+      (ngModelChange)="patient.name = patient.name.toUpperCase();">
+    </div>
+    <div
+      *ngIf="angForm.controls['name'].invalid && (angForm.controls['name'].dirty || angForm.controls['name'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['name'].errors.required">
+        Nombre es Requerido
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Apellido:</label>
+      <input class="form-control" formControlName="lastName" type="text" [(ngModel)]="patient.lastName" maxlength="40"
+      (ngModelChange)="patient.lastName = patient.lastName.toUpperCase();">
+    </div>
+    <div
+      *ngIf="angForm.controls['lastName'].invalid && (angForm.controls['lastName'].dirty || angForm.controls['lastName'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['lastName'].errors.required">
+        Apellido es Requerido
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Fecha de Nacimiento:</label>
+      <input class="form-control" formControlName="birthDate" type="date" [(ngModel)]="patient.birthDate">
+    </div>
+    <div
+      *ngIf="angForm.controls['birthDate'].invalid && (angForm.controls['birthDate'].dirty || angForm.controls['birthDate'].touched)"
+      class="alert alert-danger">
+      <div *ngIf="angForm.controls['birthDate'].errors.required">
+        Fecha de Nacimiento es Requerido
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Dirección:</label>
+      <input class="form-control" formControlName="address" type="text" [(ngModel)]="patient.address" maxlength="70"
+      (ngModelChange)="patient.address = patient.address.toUpperCase();">
+    </div>
+    <div class="form-group" align="center">
+      <label for="pwd">Suba su imagen de perfil</label>
+      <form class="md-form">
         <div class="file-field">
-            <div class="mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                    class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
+          <div class="mb-4">
+            <img src="{{patient.avatar}}" class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
+          </div>
+          <div class="d-flex justify-content-center">
+            <div class="btn btn-mdb-color btn-rounded float-left">
+              <input type="file">
             </div>
-            <div class="d-flex justify-content-center">
-                <div class="btn btn-mdb-color btn-rounded float-left">
-                    <span>Add photo</span>
-                    <input type="file">
-                </div>
-            </div>
+          </div>
         </div>
-    </form>
-</div>
-<div class="modal-footer">
-    <button type="button" class="btn btn-outline-success" (click)="managerPatient()">{{operationType === 1 ? 'Crear' :
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-success" [disabled]="angForm.pristine || angForm.invalid"
+        (click)="managerPatient()">{{operationType === 1 ? 'Crear'
+        :
         'Modificar'}}</button>
-    <button type="button" class="btn btn-outline-danger"
+      <button type="button" class="btn btn-outline-danger"
         (click)="operationType = 3; managerPatient(); ">Cancelar</button>
+    </div>
+  </form>
 </div>
