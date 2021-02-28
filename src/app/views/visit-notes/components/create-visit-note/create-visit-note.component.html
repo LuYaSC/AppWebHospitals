@@ -1,0 +1,56 @@
+<div class="form-group row">
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Seleccione Hospital</label>
+    <select class="form-control" name="hospital" [(ngModel)]="visitNote.codeHospital" #hospital="ngModel" required (ngModelChange)="selectHospital()">
+      <option *ngFor="let hospital of hospitalsApp" [ngValue]="hospital.code">{{hospital.name}}</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Seleccione Especialidad</label>
+    <select class="form-control" name="specialty" [(ngModel)]="visitNote.codeSpecialty" #specialty="ngModel" (ngModelChange)="selectSpecialty()">
+      required>
+      <option *ngFor="let specialty of listSpecialties" [ngValue]="specialty.code">{{specialty.name}}</option>
+    </select>
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Seleccione Doctor</label>
+    <select class="form-control" name="doctor" [(ngModel)]="visitNote.codeDoctor" #doctor="ngModel" required>
+      <option *ngFor="let doctor of listDoctors" [ngValue]="doctor.code">{{doctor.name}} {{doctor.lastName}}
+      </option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Seleccione Paciente</label>
+    <select class="form-control" name="patient" [(ngModel)]="visitNote.codePatient" #patient="ngModel" required>
+      <option *ngFor="let patient of patientsApp" [ngValue]="patient.code">{{patient.name}} {{patient.lastName}}
+      </option>
+    </select>
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-md-12">
+    <label class="form-label">Observaciones:</label>
+        <input class="form-control" type="text" [(ngModel)]="visitNoteDto.observations">
+
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-md-12">
+    <label class="form-label">Receta Médica:</label>
+        <input class="form-control" type="text" [(ngModel)]="visitNoteDto.prescription">
+  </div>
+</div>
+<div class="form-group row">
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Seleccione Fecha de Atención</label>
+    <input type="date" class="form-control">
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-outline-success" (click)="managerVisitNote()">{{operationType === 1 ? 'Crear' :
+    'Modificar'}}</button>
+  <button type="button" class="btn btn-outline-danger"
+    (click)="operationType = 3; managerVisitNote(); ">Cancelar</button>
+</div>

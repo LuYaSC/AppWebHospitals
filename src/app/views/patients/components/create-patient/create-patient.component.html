@@ -1,0 +1,46 @@
+<div class="form-group">
+    <div class="mb-3">
+        <label class="form-label">Nombre:</label>
+        <input class="form-control" type="text" [(ngModel)]="patient.name">
+    </div>
+</div>
+<div class="form-group">
+    <div class="mb-3">
+        <label class="form-label">Apellido:</label>
+        <input class="form-control" type="text" [(ngModel)]="patient.lastName">
+    </div>
+</div>
+<div class="form-group">
+    <div class="mb-3">
+        <label class="form-label">Fecha de Nacimiento:</label>
+        <input class="form-control" type="date" [(ngModel)]="patient.birthDate">
+    </div>
+</div>
+<div class="form-group">
+    <label class="form-label">Direccion:</label>
+    <input type="text" class="form-control" [(ngModel)]="patient.address">
+</div>
+
+<div class="form-group" align="center">
+    <label for="pwd">Suba su imagen para el doctor</label>
+    <form class="md-form">
+        <div class="file-field">
+            <div class="mb-4">
+                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                    class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="btn btn-mdb-color btn-rounded float-left">
+                    <span>Add photo</span>
+                    <input type="file">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="managerPatient()">{{operationType === 1 ? 'Crear' :
+        'Modificar'}}</button>
+    <button type="button" class="btn btn-outline-danger"
+        (click)="operationType = 3; managerPatient(); ">Cancelar</button>
+</div>

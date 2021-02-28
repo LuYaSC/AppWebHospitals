@@ -1,0 +1,63 @@
+
+<div class="form-group row">
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Seleccione Hospital</label>
+    <select class="form-control" name="hospital" [(ngModel)]="createDoctorSpecialtyDto.codeHospital" #hospital="ngModel"
+      required (ngModelChange)="selectHospital()">
+      <option *ngFor="let hospital of hospitalsApp" [ngValue]="hospital.code">{{hospital.name}}</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="exampleFormControlSelect1">Seleccione Especialidad</label>
+    <select class="form-control" name="specialty" [(ngModel)]="createDoctorSpecialtyDto.specialtyCode" #specialty="ngModel"
+      required >
+      <option *ngFor="let specialty of listSpecialties" [ngValue]="specialty.code">{{specialty.name}}</option>
+    </select>
+  </div>
+</div>
+<div class="form-group">
+    <div class="mb-3">
+        <label class="form-label">Nombre:</label>
+        <input class="form-control" type="text" [(ngModel)]="doctor.name">
+    </div>
+</div>
+<div class="form-group">
+    <div class="mb-3">
+        <label class="form-label">Apellido:</label>
+        <input class="form-control" type="text" [(ngModel)]="doctor.lastName">
+    </div>
+</div>
+<div class="form-group">
+    <div class="mb-3">
+        <label class="form-label">Fecha de Nacimiento:</label>
+        <input class="form-control" type="date" [(ngModel)]="doctor.birthDate">
+    </div>
+</div>
+<div class="form-group">
+    <label class="form-label">Direccion:</label>
+    <input type="text" class="form-control" [(ngModel)]="doctor.address">
+</div>
+
+<div class="form-group" align="center">
+    <label for="pwd">Suba su imagen para el doctor</label>
+    <form class="md-form">
+        <div class="file-field">
+            <div class="mb-4">
+                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
+                    class="rounded-circle z-depth-1-half avatar-pic" alt="Imagen Hospital">
+            </div>
+            <div class="d-flex justify-content-center">
+                <div class="btn btn-mdb-color btn-rounded float-left">
+                    <span>Add photo</span>
+                    <input type="file">
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-success" (click)="managerDoctor()">{{operationType === 1 ? 'Crear' :
+        'Modificar'}}</button>
+    <button type="button" class="btn btn-outline-danger"
+        (click)="operationType = 3; managerDoctor(); ">Cancelar</button>
+</div>
